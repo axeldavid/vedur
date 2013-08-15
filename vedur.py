@@ -75,9 +75,9 @@ class Weather(object):
     def fetch_xml(self):
         try:
             return urllib.urlopen(self.url).read()
-        except:
-            # TODO: Improve exception, raise error
-            return ""
+        except IOError:
+            raise RuntimeError('Either the service of vedur.is is down at the '
+                               'moment or you are not online.')
 
     def save_xml(self, file_path, xml_str):
         f = open(file_path, "w")
